@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.movie.R;
 import com.example.movie.model.MoviesModel;
+import com.example.movie.rest.ApiClient;
 import com.example.movie.utilities.ItemClickListener;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         final MoviesModel movie = moviesList.get(i);
         viewHolder.title.setText(movie.getTitle());
         Glide.with(mContext)
-                .load(movie.getPoster_path())
+                .load(ApiClient.IMG_URL+movie.getPoster_path())
                 .into( viewHolder.movieImage);
         viewHolder.setClickListener(new ItemClickListener() {
             @Override

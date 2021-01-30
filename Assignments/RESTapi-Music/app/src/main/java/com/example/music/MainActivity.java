@@ -1,4 +1,4 @@
-package com.example.movie;
+package com.example.music;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -9,23 +9,24 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.movie.adapter.MoviesAdapter;
-import com.example.movie.model.MovieResponse;
-import com.example.movie.model.MoviesModel;
-import com.example.movie.rest.ApiClient;
-import com.example.movie.rest.ApiInterface;
-import com.example.movie.utilities.RxUtils;
+import com.example.music.adapter.MusicAdapter;
+import com.example.music.model.MusicModel;
+import com.example.music.model.MusicResponse;
+import com.example.music.rest.ApiClient;
+import com.example.music.rest.ApiInterface;
+import com.example.music.utilities.RxUtils;
 
 import java.util.List;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observer;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
-    private MoviesAdapter mAdapter;
+    private MusicAdapter mAdapter;
     private ProgressDialog pDialog;
 
     /**
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         initialRecyclerView();
         intialaizeProgress();
         displayMovieList();
+
     }
 
     public void displayMovieList() {
@@ -51,23 +53,24 @@ public class MainActivity extends AppCompatActivity {
        // apiService.getTopRatedMovies(ApiClient.API_KEY);
         //TODO 9. Making the calls/requests
 
-        apiService.getMovieDetails("popularity", ApiClient.API_KEY)
+        apiService.getMovieDetails()
                 //Moves the work onto the background thread (Schedules.io is one of the background thread)
                 .subscribeOn(Schedulers.io())
                 //Display in the main thread after the background work is done
                 .observeOn(AndroidSchedulers.mainThread())
                 //Subscriber to the Observable
-                .subscribe(new Observer<MovieResponse>() {
+                .subscribe(new Observer<MusicResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 //                        System.out.println(d);
                     }
 
                     @Override
-                    public void onNext(MovieResponse movieResponse) {
+                    public void onNext(MusicResponse movieResponse) {
                         if ( mRecyclerView != null) {
-                            List<MoviesModel> allMovies = movieResponse.getResults();
-                            mAdapter = new MoviesAdapter(allMovies, R.layout.movie_row, getApplicationContext());
+                            List<MusicModel> allMusic = movieResponse.getResults();
+
+                            mAdapter = new MusicAdapter(allMusic, R.layout.music_row_circular, getApplicationContext());
                             mRecyclerView.setAdapter(mAdapter);
                             hidePDialog();
                         }

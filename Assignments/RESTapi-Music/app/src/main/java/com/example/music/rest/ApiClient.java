@@ -1,4 +1,4 @@
-package com.example.movie.rest;
+package com.example.music.rest;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -7,9 +7,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static final String API_KEY = "6b04dec03bbe622c55407ff079258fd8"; //6b04dec03bbe622c55407ff079258fd8
-    public static final String BASE_URL = "https://api.themoviedb.org/3/"; //http://api.themoviedb.org/3/movie/top_rated
-    public static final String IMG_URL = "https://image.tmdb.org/t/p/w500";
+   // public static final String API_KEY = "6b04dec03bbe622c55407ff079258fd8"; //6b04dec03bbe622c55407ff079258fd8
+    public static final String BASE_URL = "https://itunes.apple.com"; //http://api.themoviedb.org/3/movie/top_rated
+//    public static final String IMG_URL = "https://image.tmdb.org/t/p/w500";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
