@@ -13,5 +13,5 @@ public interface ApiInterface {
 //        Observable<List<MovieResponse>> getTopRatedMovies(@Query("api_key") String apiKey);
 
     @GET("/search?term=classick&amp;media=music&amp;entity=song&amp;limit=50")
-    Observable<MusicResponse> getMovieDetails();
+    Observable<MusicResponse> getMusicDetails();
 }

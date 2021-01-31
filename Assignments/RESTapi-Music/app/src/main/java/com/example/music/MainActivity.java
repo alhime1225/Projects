@@ -16,6 +16,7 @@ import com.example.music.rest.ApiClient;
 import com.example.music.rest.ApiInterface;
 import com.example.music.utilities.RxUtils;
 
+
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
        // apiService.getTopRatedMovies(ApiClient.API_KEY);
         //TODO 9. Making the calls/requests
 
-        apiService.getMovieDetails()
+        apiService.getMusicDetails()
                 //Moves the work onto the background thread (Schedules.io is one of the background thread)
                 .subscribeOn(Schedulers.io())
                 //Display in the main thread after the background work is done
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         if ( mRecyclerView != null) {
                             List<MusicModel> allMusic = movieResponse.getResults();
 
-                            mAdapter = new MusicAdapter(allMusic, R.layout.music_row_circular, getApplicationContext());
+                            mAdapter = new MusicAdapter(allMusic, R.layout.music_row_circular, MainActivity.this);
                             mRecyclerView.setAdapter(mAdapter);
                             hidePDialog();
                         }
@@ -88,9 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
     }
-
 
     @Override
     public void onDestroy() {

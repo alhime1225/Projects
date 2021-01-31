@@ -2,6 +2,7 @@ package com.example.music.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.music.MainActivity;
+import com.example.music.MusicDetailsActivity;
 import com.example.music.R;
 import com.example.music.model.MusicModel;
-import com.example.music.utilities.ItemClickListener;
+import com.example.music.utilities.MyItemClickListener;
 
 
 import java.util.List;
@@ -50,14 +54,20 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
             Glide.with(mContext)
                     .load(music.getArtworkUrl100())
                     .into( viewHolder.movieImage);
-            viewHolder.setClickListener(new ItemClickListener() {
+            viewHolder.setClickListener(new MyItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick) {
+
+
                     if (isLongClick) {
                         Toast.makeText(mContext, "#" + position + " - " + music.getArtistName() + " (Long click)", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(mContext, "#" + position + " - " + music.getArtistName(), Toast.LENGTH_SHORT).show();
                     }
+
+                    Intent intent= new Intent(mContext, MusicDetailsActivity.class);
+                    intent.putExtra("MUSIC",music);
+                    ((MainActivity)mContext).startActivity(intent);
                 }
             });
 
@@ -78,7 +88,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         public ImageView movieImage;
         public TextView artistName;
         public TextView price;
-        private ItemClickListener clickListener;
+        private MyItemClickListener clickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -92,7 +102,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
 
 
         }
-        public void setClickListener(ItemClickListener itemClickListener) {
+        public void setClickListener(MyItemClickListener itemClickListener) {
             this.clickListener = itemClickListener;
         }
 

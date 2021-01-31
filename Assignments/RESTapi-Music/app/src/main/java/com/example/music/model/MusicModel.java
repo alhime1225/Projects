@@ -1,8 +1,9 @@
 package com.example.music.model;
 
-import com.google.gson.annotations.Expose;
 
-public class MusicModel {
+import java.io.Serializable;
+
+public class MusicModel implements Serializable {
   private String track;
   private String kind;
   private long collectionId;
