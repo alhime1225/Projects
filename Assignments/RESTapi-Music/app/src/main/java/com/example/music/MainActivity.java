@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.music.adapter.MusicAdapter;
 import com.example.music.model.MusicModel;
@@ -15,6 +16,7 @@ import com.example.music.model.MusicResponse;
 import com.example.music.rest.ApiClient;
 import com.example.music.rest.ApiInterface;
 import com.example.music.utilities.RxUtils;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private MusicAdapter mAdapter;
     private ProgressDialog pDialog;
+    private TextInputEditText searchView;
 
     /**
      * Subscription that represents a group of Subscriptions that are unsubscribed together.
@@ -43,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         initialRecyclerView();
         intialaizeProgress();
         displayMovieList();
+
+        searchView  =findViewById(R.id.txtSearch);
+        searchView.setOnKeyListener((v, keyCode, event) -> {
+String searchKey=searchView.getText().toString();
+            mAdapter.getFilter().filter(searchKey);
+            Toast.makeText(MainActivity.this,"Hello Bro", Toast.LENGTH_LONG).show();
+            return false;
+        });
 
     }
 
