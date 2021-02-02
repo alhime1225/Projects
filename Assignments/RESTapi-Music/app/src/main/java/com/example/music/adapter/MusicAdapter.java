@@ -119,8 +119,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
             viewHolder.setClickListener(new MyItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick) {
-
-
                     if (isLongClick) {
                         Toast.makeText(mContext, "#" + position + " - " + music.getArtistName() + " (Long click)", Toast.LENGTH_SHORT).show();
                     } else {
