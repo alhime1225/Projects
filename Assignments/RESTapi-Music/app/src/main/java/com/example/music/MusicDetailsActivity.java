@@ -3,14 +3,10 @@ package com.example.music;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
-import com.example.music.model.MusicModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.music.model.Music;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +17,7 @@ public class MusicDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_details);
 
-     MusicModel music= (MusicModel) getIntent().getExtras().get("MUSIC");
+     Music music= (Music) getIntent().getExtras().get("MUSIC");
 
         ImageView img2 = findViewById(R.id.img2);
 

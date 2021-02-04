@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MusicResponse {
     private int resultCount;
-    private List<MusicModel> results;
+    private List<Music> results;
 
     public int getResultCount() {
         return resultCount;
@@ -14,11 +14,11 @@ public class MusicResponse {
         this.resultCount = resultCount;
     }
 
-    public List<MusicModel> getResults() {
+    public List<Music> getResults() {
         return results;
     }
 
-    public void setResults(List<MusicModel> results) {
+    public void setResults(List<Music> results) {
         this.results = results;
     }
 }
