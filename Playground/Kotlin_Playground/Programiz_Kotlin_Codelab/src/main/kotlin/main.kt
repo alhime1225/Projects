@@ -2,7 +2,7 @@ import java.util.*
 
 //TODO - Main method
 fun main(args: Array<String>) {
-    println("Hello World!")
+//    println("Hello World!")
 //    operator fun String?.plus(other: Any?): String {}
 
     /*
@@ -26,16 +26,18 @@ fun main(args: Array<String>) {
 //        kotlinContinue()
 
     //TODO : Functions - Method call
-    val number1 = 12.2
-    val number2 = 3.4
-    val result: Int
+//    val number1 = 12.2
+//    val number2 = 3.4
+//    val result: Int
+//
+//    result = addNumbers(number1, number2)
+//    println("result = $result")
+//
+//    println("------------------")
+//    var data = getDetails("Aisha", "Test", "Address", 34321345);
+//    println(data)
 
-    result = addNumbers(number1, number2)
-    println("result = $result")
-
-    println("------------------")
-    var data = getDetails("Aisha", "Test", "Address", 34321345);
-    println(data)
+    kotlinInfixFunctionCall()
 
 }
 
@@ -476,3 +478,51 @@ fun addNumbers(n1: Double, n2: Double): Int {
 fun getName(firstName: String, lastName: String): String = "$firstName $lastName"
 
 fun getDetails(firstName:String, lastName:String,address:String,phoneNumber:Int) = "$firstName $lastName $address $phoneNumber"
+
+//TODO : Infix Function Call
+fun kotlinInfixFunctionCall(){
+    /*
+    val a = true
+    val b = false
+    var result: Boolean
+
+    result = a or b // a.or(b)
+    println("result = $result")
+
+    result = a and b // a.and(b)
+    println("result = $result")
+     */
+
+    /*
+        You can make a function call in Kotlin using infix notation if the function
+
+        is a member function (or an extension function).
+        has only one single parameter.
+        is marked with infix keyword.
+     */
+    val p = Structure()
+    p createPyramid 4
+}
+
+class Structure() {
+    //infix?
+    infix fun createPyramid(rows: Int) {
+        var k = 0
+        for (i in 1..rows) {
+            k = 0
+            for (space in 1..rows-i) {
+                print("  ")
+            }
+            while (k != 2*i-1) {
+                print("* ")
+                ++k
+            }
+            println()
+        }
+    }
+}
+
+//TODO : Default and named arguments
+fun kolinDefaultAndNamedArguments(){
+
+}
