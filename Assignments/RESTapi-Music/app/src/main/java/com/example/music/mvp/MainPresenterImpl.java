@@ -3,6 +3,7 @@ package com.example.music.mvp;
 import com.example.music.model.Music;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainPresenterImpl implements MusicMVP.Presenter, MusicMVP.GetNoticeIntractor.OnFinishedListener {
 

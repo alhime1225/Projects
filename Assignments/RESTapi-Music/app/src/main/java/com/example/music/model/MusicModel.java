@@ -13,6 +13,9 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MusicModel implements MusicMVP.Model {
     private List<Music> allMusics;
@@ -48,33 +51,19 @@ public class MusicModel implements MusicMVP.Model {
 
 
         apiService.getMusicDetails()
-                //Moves the work onto the background thread (Schedules.io is one of the background thread)
-                .subscribeOn(Schedulers.io())
-                //Display in the main thread after the background work is done
-                .observeOn(AndroidSchedulers.mainThread())
                 //Subscriber to the Observable
-                .subscribe(new Observer<MusicResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-//                        System.out.println(d);
-                    }
+                .enqueue( new Callback<MusicResponse>() {
+                              @Override
+                              public void onResponse(Call<MusicResponse> call, Response<MusicResponse> response) {
+                                        allMusics=response.body().getResults();
+                              }
 
-                    @Override
-                    public void onNext(MusicResponse movieResponse) {
-                          allMusics = movieResponse.getResults();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        allMusics = new ArrayList<>();
-                        Log.d("DEBUG_TEST ", e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        System.out.println("Done");
-                    }
-                });
+                              @Override
+                              public void onFailure(Call<MusicResponse> call, Throwable t) {
+                                         allMusics= new ArrayList<>();
+                              }
+                          }
+                    );
 
         return allMusics;
     }

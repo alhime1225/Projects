@@ -1,33 +1,45 @@
 package com.example.music;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.music.adapter.MusicAdapterOld;
+
+import com.example.music.adapter.MusicAdapter;
+
 import com.example.music.model.Music;
-import com.example.music.model.MusicModel;
+
+import com.example.music.mvp.GetNoticeIntractorImpl;
+import com.example.music.mvp.MainPresenterImpl;
 import com.example.music.mvp.MusicMVP;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.music.utilities.RecyclerItemClickListener;
 
 
+
+import java.util.ArrayList;
 import java.util.List;
-public class MainActivity extends AppCompatActivity implements MainContract.MainView {
+public class MainActivity extends AppCompatActivity implements MusicMVP.View {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
 
-    private MainContract.presenter presenter;
+    private MusicMVP.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.recycler_main);
         initializeToolbarAndRecyclerView();
         initProgressBar();
 
@@ -42,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
      */
     private void initializeToolbarAndRecyclerView() {
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view_employee_list);
+        recyclerView = findViewById(R.id.list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -75,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
      * */
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
-        public void onItemClick(Notice notice) {
+        public void onItemClick(Music music) {
 
             Toast.makeText(MainActivity.this,
-                    "List title:  " + notice.getTitle(),
+                    "List title:  " + music.getTrack(),
                     Toast.LENGTH_LONG).show();
 
         }
@@ -95,9 +107,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     }
 
     @Override
-    public void setDataToRecyclerView(ArrayList<Notice> noticeArrayList) {
+    public void setDataToRecyclerView(ArrayList<Music> noticeArrayList) {
 
-        NoticeAdapter adapter = new NoticeAdapter(noticeArrayList , recyclerItemClickListener);
+        MusicAdapter adapter = new MusicAdapter(noticeArrayList , recyclerItemClickListener);
         recyclerView.setAdapter(adapter);
 
     }
