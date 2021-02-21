@@ -1,4 +1,6 @@
 package com.example.weatherapp.model
 
-class WeatherModel {
+import androidx.appcompat.app.AppCompatActivity
+
+class WeatherModel : AppCompatActivity() {
 }
